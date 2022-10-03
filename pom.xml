@@ -1,0 +1,225 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.junit</groupId>
+  <artifactId>junit-parent</artifactId>
+  <version>5.9.1</version>
+  <packaging>pom</packaging>
+  <name>JUnit 5 (Parent)</name>
+
+  <url>https://junit.org/junit5/</url>
+
+  <licenses>
+    <license>
+      <name>Eclipse Public License v2.0</name>
+      <url>https://www.eclipse.org/legal/epl-v20.html</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>bechte</id>
+      <name>Stefan Bechtold</name>
+      <email>stefan.bechtold@me.com</email>
+    </developer>
+    <developer>
+      <id>jlink</id>
+      <name>Johannes Link</name>
+      <email>business@johanneslink.net</email>
+    </developer>
+    <developer>
+      <id>marcphilipp</id>
+      <name>Marc Philipp</name>
+      <email>mail@marcphilipp.de</email>
+    </developer>
+    <developer>
+      <id>mmerdes</id>
+      <name>Matthias Merdes</name>
+      <email>matthias.merdes@heidelpay.com</email>
+    </developer>
+    <developer>
+      <id>sbrannen</id>
+      <name>Sam Brannen</name>
+      <email>sam@sambrannen.com</email>
+    </developer>
+    <developer>
+      <id>sormuras</id>
+      <name>Christian Stein</name>
+      <email>sormuras@gmail.com</email>
+    </developer>
+    <developer>
+      <id>juliette-derancourt</id>
+      <name>Juliette de Rancourt</name>
+      <email>derancourt.juliette@gmail.com</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/junit-team/junit5.git</connection>
+    <developerConnection>scm:git:git://github.com/junit-team/junit5.git</developerConnection>
+    <url>https://github.com/junit-team/junit5</url>
+  </scm>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <platform.version>1.9.1</platform.version>
+  </properties>
+
+  <modules>
+    <module>junit-bom</module>
+    <module>junit-jupiter</module>
+    <module>junit-jupiter-api</module>
+    <module>junit-jupiter-engine</module>
+    <module>junit-jupiter-migrationsupport</module>
+    <module>junit-jupiter-params</module>
+    <module>junit-platform-commons</module>
+    <module>junit-platform-console</module>
+    <module>junit-platform-console-standalone</module>
+    <module>junit-platform-engine</module>
+    <module>junit-platform-jfr</module>
+    <module>junit-platform-launcher</module>
+    <module>junit-platform-reporting</module>
+    <module>junit-platform-runner</module>
+    <module>junit-platform-suite</module>
+    <module>junit-platform-suite-api</module>
+    <module>junit-platform-suite-commons</module>
+    <module>junit-platform-suite-engine</module>
+    <module>junit-platform-testkit</module>
+    <module>junit-vintage-engine</module>
+  </modules>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.10.1</version>
+          <executions>
+            <execution>
+              <id>default-compile</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>compile</goal>
+              </goals>
+              <configuration>
+                <source>8</source>
+                <target>8</target>
+              </configuration>
+            </execution>
+            <execution>
+              <id>compile-java-9</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>compile</goal>
+              </goals>
+              <configuration>
+                <release>9</release>
+                <compileSourceRoots>
+                  <compileSourceRoot>${project.basedir}/src/main/java9</compileSourceRoot>
+                </compileSourceRoots>
+                <multiReleaseOutput>true</multiReleaseOutput>
+              </configuration>
+            </execution>
+            <execution>
+              <id>compile-java-17</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>compile</goal>
+              </goals>
+              <configuration>
+                <release>17</release>
+                <compileSourceRoots>
+                  <compileSourceRoot>${project.basedir}/src/main/java17</compileSourceRoot>
+                </compileSourceRoots>
+                <multiReleaseOutput>true</multiReleaseOutput>
+              </configuration>
+            </execution>
+            <!--
+            <execution>
+              <id>compile-module-info</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>compile</goal>
+              </goals>
+              <configuration>
+                <release>9</release>
+                <compileSourceRoots>
+                  <compileSourceRoot>${project.basedir}/src/module</compileSourceRoot>
+                </compileSourceRoots>
+              </configuration>
+            </execution>
+            -->
+          </executions>
+          <configuration>
+            <testSource>17</testSource>
+            <testTarget>17</testTarget>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.3.0</version>
+          <configuration>
+            <archive>
+              <addMavenDescriptor>false</addMavenDescriptor>
+              <manifestEntries>
+                <Built-By>JUnit Team</Built-By>
+                <Multi-Release>true</Multi-Release>
+                <Implementation-Title>${project.artifactId}</Implementation-Title>
+                <Implementation-Vendor>junit.org</Implementation-Vendor>
+                <Implementation-Version>${project.version}</Implementation-Version>
+                <Specification-Title>${project.artifactId}</Specification-Title>
+                <Specification-Vendor>junit.org</Specification-Vendor>
+                <Specification-Version>${project.version}</Specification-Version>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>add-resource</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>../</directory>
+                  <targetPath>META-INF/</targetPath>
+                  <includes>
+                    <include>LICENSE.md</include>
+                    <include>LICENSE-notice.md</include>
+                  </includes>
+                </resource>
+                <resource>
+                  <directory>.</directory>
+                  <targetPath>META-INF/</targetPath>
+                  <includes>
+                    <include>LICENSE-*.md</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apiguardian</groupId>
+      <artifactId>apiguardian-api</artifactId>
+      <version>1.1.2</version>
+    </dependency>
+  </dependencies>
+
+</project>
