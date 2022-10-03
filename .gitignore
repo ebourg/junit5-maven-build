@@ -2,6 +2,10 @@
 .gradle
 build
 
+# Maven
+target/
+dependency-reduced-pom.xml
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
