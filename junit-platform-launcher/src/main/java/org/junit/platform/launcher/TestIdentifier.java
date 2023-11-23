@@ -316,7 +316,7 @@ public final class TestIdentifier implements Serializable {
 		}
 
 		@SuppressWarnings("unchecked")
-		private SerializedForm(ObjectInputStream.GetField fields) throws IOException {
+		private SerializedForm(ObjectInputStream.GetField fields) throws ClassNotFoundException, IOException {
 			this.uniqueId = (String) fields.get("uniqueId", null);
 			this.parentId = (String) fields.get("parentId", null);
 			this.displayName = (String) fields.get("displayName", null);
